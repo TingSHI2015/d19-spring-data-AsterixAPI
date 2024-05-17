@@ -7,6 +7,10 @@ public record Character(
         String id,
         String name,
         int age,
+
+        // To use the 3rd. filter with Example in 'AsterixController', age muss be 'Integer'!!!
+        //Integer age,
+
         String profession) {
 }
 

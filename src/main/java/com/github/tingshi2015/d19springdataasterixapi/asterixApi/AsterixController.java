@@ -48,6 +48,7 @@ public class AsterixController {
     }
 
 //----Method 1: filter with steam (Low efficiency for big DB!)-------
+//'age' in Controller can keep to be 'int' !!!
     @GetMapping("/characters1")       //error: @GetMapping("/characters")!Duplicated Endpoint with the first @GetMapping("/characters")
     public List<Character> getAllCharactersWithStream(@RequestParam(required = false) String name,
                                         @RequestParam(required = false) Integer age,              //false: 'int' age!
@@ -61,6 +62,7 @@ public class AsterixController {
     }
 
 //----Method 2: filter with Repository (Low efficiency for big DB!)-------
+//'age' in Controller can keep to be 'int' !!!
 @GetMapping("/api/asterix/characters2")
 public List<Character> getAllCharactersWithRepository(@RequestParam(required = false) String name,
                                                       @RequestParam(required = false) Integer age,
@@ -91,14 +93,16 @@ public List<Character> getAllCharactersWithRepository(@RequestParam(required = f
     }
 }
 
-//----Method 3: filter with Example -------
-@GetMapping("/api/asterix/characters3")
+//----Method 3: filter with Example ('age' in Controller must be 'Integer')-------
+/*@GetMapping("/api/asterix/characters3")
 public List<Character> getAllCharactersWithExample(@RequestParam(required = false) String name,
                                                    @RequestParam(required = false) Integer age,
                                                    @RequestParam(required = false) String profession) {
 
     return characterRepository.findAll(Example.of(new Character(null, name, age, profession)));
-}
+}*/
+
+
 
 
 
