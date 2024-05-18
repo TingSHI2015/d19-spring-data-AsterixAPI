@@ -47,6 +47,16 @@ public class AsterixController {
 
     }
 
+    //---Bonus 4---with Stream (Low efficiency for big DB! MongoTemplate will be better!)-------
+    @GetMapping("/characters/average-age")
+    public double getAverageAgeOfCharactersWithProfession(@RequestParam String profession){      //double, not int!
+        return characterRepository.findAll().stream()
+                .filter(character -> profession==null || profession.equals(character.profession()))
+                .mapToDouble(Character::age)
+                .average()
+                .orElse(0);
+    }
+
 //----Method 1: filter with steam (Low efficiency for big DB!)-------
 //'age' in Controller can keep to be 'int' !!!
     @GetMapping("/characters1")       //error: @GetMapping("/characters")!Duplicated Endpoint with the first @GetMapping("/characters")
@@ -101,9 +111,6 @@ public List<Character> getAllCharactersWithExample(@RequestParam(required = fals
 
     return characterRepository.findAll(Example.of(new Character(null, name, age, profession)));
 }*/
-
-
-
 
 
     @PostMapping("/characters")
